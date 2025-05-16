@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch ReceiveSendAPI",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "nodemon",
+            "program": "${workspaceFolder}/src/server.js",
+            "restart": true,
+            "args": [],
+            "env": {
+                "PORT": "3000",
+                "AUTH_API_URL": "http://auth-api-url",
+                "RECORD_API_URL": "http://record-api-url",
+                "REDIS_HOST": "127.0.0.1",
+                "REDIS_PORT": "6379"
+            },
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}
