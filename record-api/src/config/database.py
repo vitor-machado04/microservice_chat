@@ -11,7 +11,7 @@ MYSQL_USER = getenv("MYSQL_USER", "root")
 MYSQL_PASSWORD = getenv("MYSQL_PASSWORD", "root")
 MYSQL_HOST = getenv("MYSQL_HOST", "localhost")
 MYSQL_PORT = getenv("MYSQL_PORT", "3306")
-MYSQL_DATABASE = getenv("MYSQL_DATABASE", "record_db")
+MYSQL_DATABASE = getenv("MYSQL_DATABASE", "chat_app")
 
 # String de conexão do MySQL
 SQLALCHEMY_DATABASE_URL = f"mysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}"
