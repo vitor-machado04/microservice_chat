@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  php:
+    build: .
+    container_name: auth-api-php
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - auth-net
+    environment:
+      - COMPOSER_ALLOW_SUPERUSER=1
+    command: bash -c "composer install && apache2-foreground"
+    
+networks:
+  auth-net:
+    driver: bridge
