@@ -1,0 +1,5 @@
+### Comando para derrubar todos os valumes
+docker-compose down --volumes
+
+### Comando para buildar o docker
+docker-compose up --build
