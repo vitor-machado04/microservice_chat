@@ -14,7 +14,7 @@
                 "AUTH_API_URL": "http://auth-api-url",
                 "RECORD_API_URL": "http://record-api-url",
                 "REDIS_HOST": "127.0.0.1",
-                "REDIS_PORT": "6379"
+                "REDIS_PORT": "6379"    
             },
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
