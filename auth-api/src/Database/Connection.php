@@ -4,15 +4,17 @@ namespace App\Database;
 use PDO;
 use PDOException;
 
-class Connection {
+class Connection
+{
     private static $conn;
 
-    public static function getConnection() {
+    public static function getConnection()
+    {
         if (!self::$conn) {
-            $host = 'localhost';
-            $db = 'project';
-            $user = 'root';
-            $pass = 'senha';
+            $host = 'db';
+            $db = 'chat_app';
+            $user = 'user';
+            $pass = 'password';
             $charset = 'utf8mb4';
 
             $dsn = "mysql:host=$host;dbname=$db;charset=$charset";

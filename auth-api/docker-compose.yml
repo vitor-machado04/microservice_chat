@@ -8,12 +8,34 @@ services:
       - "8000:80"
     volumes:
       - .:/var/www/html
+    depends_on:
+      - db
     networks:
       - auth-net
     environment:
       - COMPOSER_ALLOW_SUPERUSER=1
     command: bash -c "composer install && apache2-foreground"
-    
+
+  db:
+    image: mysql:5.7
+    container_name: auth-api-db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chat_app
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - auth-net
+
 networks:
   auth-net:
     driver: bridge
+
+volumes:
+  db_data:

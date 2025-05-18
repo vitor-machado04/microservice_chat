@@ -13,13 +13,17 @@ class Router {
 
         if ($uri === '/token' && $method === 'GET') {
             (new AuthController())->getToken();
-        } elseif ($uri === '/token' && $method === 'POST') {
+        } 
+        elseif ($uri === '/token' && $method === 'POST') {
             (new AuthController())->postToken();
-        } elseif ($uri === '/user' && $method === 'POST') {
+        } 
+        elseif ($uri === '/user' && $method === 'POST') {
             (new AuthController())->postUser();
-        } elseif ($uri === '/user' && $method === 'GET') {
+        } 
+        elseif ($uri === '/user' && $method === 'GET') {
             (new AuthController())->getUser();
-        } else {
+        } 
+        else {
             http_response_code(404);
             echo json_encode(["message" => "Endpoint não encontrado"]);
         }

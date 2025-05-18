@@ -4,15 +4,18 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Services\JwtService;
 
-class AuthController {
+class AuthController
+{
     private $userModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = new User();
     }
 
     // GET /token?user=userId
-    public function getToken() {
+    public function getToken()
+    {
         $headers = getallheaders();
         $token = $headers['Authorization'] ?? null;
         $userId = $_GET['user'] ?? null;
@@ -24,8 +27,8 @@ class AuthController {
         }
 
         $decoded = JwtService::validateToken($token);
+
         if (!$decoded) {
-            http_response_code(401);
             echo json_encode(['auth' => false]);
             return;
         }
@@ -37,7 +40,8 @@ class AuthController {
             return;
         }
 
-        if ($decoded->userId == $user['user_id'] && password_verify($user['password'], $user['password'])) {
+        // ✅ Verifica apenas se o userId do token é o mesmo do banco
+        if ($decoded->userId == $user['user_id']) {
             echo json_encode(['auth' => true]);
         } else {
             echo json_encode(['auth' => false]);
@@ -45,7 +49,8 @@ class AuthController {
     }
 
     // POST /token
-    public function postToken() {
+    public function postToken()
+    {
         $data = json_decode(file_get_contents("php://input"), true);
 
         if (!isset($data['email']) || !isset($data['password'])) {
@@ -73,7 +78,8 @@ class AuthController {
     }
 
     // POST /user
-    public function postUser() {
+    public function postUser()
+    {
         $data = json_decode(file_get_contents("php://input"), true);
 
         if (!isset($data['name'], $data['lastName'], $data['email'], $data['password'])) {
@@ -108,7 +114,8 @@ class AuthController {
     }
 
     // GET /user?email=
-    public function getUser() {
+    public function  getUser()
+    {
         $email = $_GET['email'] ?? null;
 
         if (!$email) {
