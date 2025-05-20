@@ -8,7 +8,8 @@ exports.saveMessage = async (userIdSend, userIdReceive, message) => {
       userIdReceive,
       message
     });
-  } catch (error) {
+  } 
+  catch (error) {
     console.error('Error saving message:', error.message);
   }
 };

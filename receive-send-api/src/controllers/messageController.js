@@ -9,10 +9,8 @@ exports.postMessage = async (req, res) => {
   const authResp = await authService.verifyAuth(token, userIdSend);
   if (!authResp.auth) return res.status(401).json({ msg: 'not auth' });
 
-  // Envia para fila Redis
   await redisService.enqueueMessage(`${userIdSend}${userIdReceive}`, { message });
 
-  // Chama API para salvar no histórico imediatamente (opcional)
   await recordService.saveMessage(userIdSend, userIdReceive, message);
 
   return res.json({ message: 'message sended with success' });
