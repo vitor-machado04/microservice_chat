@@ -31,10 +31,32 @@ services:
     environment:
       - PORT=3000
       - AUTH_API_URL=http://auth-api-php:80
-      - RECORD_API_URL=http://record-api-url
+      - RECORD_API_URL=http://record-api:8000
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     command: npx nodemon --inspect=0.0.0.0:9229 src/server.js
+
+  record-api:
+    build:
+      context: ./record-api
+    container_name: record-api
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./record-api:/app
+    networks:
+      - auth-net
+    environment:
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=chat_app
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - db
+      - redis
 
   db:
     image: mysql:5.7
