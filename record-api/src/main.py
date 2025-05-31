@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from typing import List
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from .config.database import get_db
 from .services.message_service import MessageService
 from .services.redis_service import RedisService
@@ -27,7 +28,7 @@ class MessageResponse(BaseModel):
 async def health_check(db: Session = Depends(get_db)):
     try:
         # Testa conexão com o banco
-        db.execute("SELECT 1")
+        db.execute(text("SELECT 1"))
         
         # Testa conexão com Redis
         redis = RedisService()
