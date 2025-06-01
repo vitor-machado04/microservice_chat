@@ -45,7 +45,7 @@
     },
     {
       "name": "Launch RecordAPI (FastAPI)",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/record-api/src/main.py",
       "console": "integratedTerminal",

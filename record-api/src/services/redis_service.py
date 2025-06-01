@@ -7,7 +7,6 @@ load_dotenv()
 
 class RedisService:
     def __init__(self):
-        # Configuração do cliente Redis
         self.redis_client = redis.Redis(
             host=getenv("REDIS_HOST", "redis"),
             port=int(getenv("REDIS_PORT", 6379)),
@@ -15,14 +14,12 @@ class RedisService:
             decode_responses=True
         )
 
-    # Busca dados do cache
     def get_cache(self, key: str) -> dict:
         data = self.redis_client.get(key)
         if data:
             return json.loads(data)
         return None
 
-    # Salva dados no cache
     def set_cache(self, key: str, value: dict, ttl_seconds: int = 60) -> None:
         self.redis_client.setex(
             key,

@@ -22,13 +22,10 @@ engine = create_engine(
     pool_pre_ping=True  # Verifica a conexão antes de usar
 )
 
-# Sessão do banco de dados
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Base para os modelos
 Base = declarative_base()
 
-# Função para obter a sessão do banco de dados
 def get_db():
     db = SessionLocal()
     try:

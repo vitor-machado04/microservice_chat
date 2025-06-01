@@ -8,7 +8,6 @@ class Router {
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        // Limpa a URI para tirar /public (dependendo do servidor)
         $uri = str_replace('/auth-api/public', '', $uri);
 
         if ($uri === '/token' && $method === 'GET') {

@@ -13,7 +13,6 @@ class AuthController
         $this->userModel = new User();
     }
 
-    // GET /token?user=userId
     public function getToken()
     {
         $headers = getallheaders();
@@ -40,15 +39,13 @@ class AuthController
             return;
         }
 
-        // ✅ Verifica apenas se o userId do token é o mesmo do banco
         if ($decoded->userId == $user['user_id']) {
             echo json_encode(['auth' => true]);
-        } else {
+        } 
+        else {
             echo json_encode(['auth' => false]);
         }
     }
-
-    // POST /token
     public function postToken()
     {
         $data = json_decode(file_get_contents("php://input"), true);
@@ -77,7 +74,6 @@ class AuthController
         echo json_encode(['token' => $token]);
     }
 
-    // POST /user
     public function postUser()
     {
         $data = json_decode(file_get_contents("php://input"), true);
@@ -113,7 +109,6 @@ class AuthController
         }
     }
 
-    // GET /user?email=
     public function  getUser()
     {
         $email = $_GET['email'] ?? null;
@@ -127,9 +122,10 @@ class AuthController
         $user = $this->userModel->findByEmail($email);
 
         if ($user) {
-            unset($user['password']); // não retorna senha
+            unset($user['password']);
             echo json_encode($user);
-        } else {
+        }
+         else {
             http_response_code(404);
             echo json_encode(['message' => 'Usuário não encontrado']);
         }
