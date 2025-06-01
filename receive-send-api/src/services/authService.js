@@ -18,10 +18,10 @@ exports.verifyAuth = async (token, userId) => {
   }
 };
 
-exports.getAllUsers = async () => {
+exports.getAllUsers = async (email) => {
   try {
-    const resp = await axios.get(`${AUTH_API_URL}/users`);
-    return resp.data.users;
+    const resp = await axios.get(`${AUTH_API_URL}/user?email=${email}`);
+    return [resp.data];
   } 
   catch (error) {
     return [];

@@ -14,6 +14,7 @@ exports.dequeueAllMessages = async (queueName) => {
   do {
     msg = await client.lPop(queueName);
     if (msg) messages.push(JSON.parse(msg));
-  } while (msg !== null);
+  } 
+  while (msg !== null);
   return messages;
 };

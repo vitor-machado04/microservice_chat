@@ -36,18 +36,19 @@ exports.postMessageWorker = async (req, res) => {
 
 exports.getMessages = async (req, res) => {
   const token = req.headers.authorization;
+  const email = req.query.email;
   const userId = req.query.user;
 
   const authResp = await authService.verifyAuth(token, userId);
   if (!authResp.auth) return res.status(401).json({ msg: 'not auth' });
 
   // Busca todos usuários da Auth-API
-  const users = await authService.getAllUsers();
+  const users = await authService.getAllUsers(email);
 
   // Para cada usuário, busca mensagens da tabela message (Record-API)
   const messages = [];
   for (const user of users) {
-    const msgs = await recordService.getMessages(`${user.user_id}${userId}`);
+    const msgs = await recordService.getMessages(user.user_id); // ← CORRETO: user_id individual
     messages.push(...msgs.map(m => ({ userId: user.user_id, msg: m.message })));
   }
 

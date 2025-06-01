@@ -11,7 +11,7 @@
       "env": {
         "PORT": "3000",
         "AUTH_API_URL": "http://auth-api-php:80",
-        "RECORD_API_URL": "http://record-api-url",
+        "RECORD_API_URL": "http://record-api:8000",
         "REDIS_HOST": "127.0.0.1",
         "REDIS_PORT": "6379"
       },
@@ -42,6 +42,31 @@
       "pathMappings": {
         "/var/www/html": "${workspaceFolder}/auth-api"
       }
+    },
+    {
+      "name": "Launch RecordAPI (FastAPI)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/record-api/src/main.py",
+      "console": "integratedTerminal",
+      "env": {
+        "MYSQL_USER": "user",
+        "MYSQL_PASSWORD": "password",
+        "MYSQL_HOST": "db",
+        "MYSQL_PORT": "3306",
+        "MYSQL_DATABASE": "chat_app",
+        "REDIS_HOST": "redis",
+        "REDIS_PORT": "6379"
+      },
+      "args": [
+        "run",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--reload"
+      ],
+      "module": "uvicorn"
     }
   ]
 }

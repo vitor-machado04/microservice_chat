@@ -6,6 +6,7 @@ from sqlalchemy import text
 from .config.database import get_db
 from .services.message_service import MessageService
 from .services.redis_service import RedisService
+from datetime import datetime
 
 app = FastAPI(title="Record API")
 
@@ -19,7 +20,7 @@ class MessageResponse(BaseModel):
     message: str
     user_id_send: int
     user_id_receive: int
-    created_at: str
+    created_at: datetime
 
     class Config:
         from_attributes = True

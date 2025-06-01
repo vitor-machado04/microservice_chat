@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuração do banco de dados
-MYSQL_USER = getenv("MYSQL_USER", "root")
-MYSQL_PASSWORD = getenv("MYSQL_PASSWORD", "root")
-MYSQL_HOST = getenv("MYSQL_HOST", "localhost")
+MYSQL_USER = getenv("MYSQL_USER", "user")
+MYSQL_PASSWORD = getenv("MYSQL_PASSWORD", "password")
+MYSQL_HOST = getenv("MYSQL_HOST", "db")
 MYSQL_PORT = getenv("MYSQL_PORT", "3306")
 MYSQL_DATABASE = getenv("MYSQL_DATABASE", "chat_app")
 
@@ -35,3 +35,7 @@ def get_db():
         yield db
     finally:
         db.close() 
+
+from src.models.user import User
+from src.models.message import Message  
+Base.metadata.create_all(bind=engine)        
