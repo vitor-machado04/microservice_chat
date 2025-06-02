@@ -44,29 +44,19 @@
       }
     },
     {
-      "name": "Launch RecordAPI (FastAPI)",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "${workspaceFolder}/record-api/src/main.py",
-      "console": "integratedTerminal",
-      "env": {
-        "MYSQL_USER": "user",
-        "MYSQL_PASSWORD": "password",
-        "MYSQL_HOST": "db",
-        "MYSQL_PORT": "3306",
-        "MYSQL_DATABASE": "chat_app",
-        "REDIS_HOST": "redis",
-        "REDIS_PORT": "6379"
+      "name": "Attach to RecordAPI (Docker)",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
       },
-      "args": [
-        "run",
-        "--host",
-        "0.0.0.0",
-        "--port",
-        "8000",
-        "--reload"
-      ],
-      "module": "uvicorn"
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}/record-api",
+          "remoteRoot": "/app"
+        }
+      ]
     }
   ]
 }

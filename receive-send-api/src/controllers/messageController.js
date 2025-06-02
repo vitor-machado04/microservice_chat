@@ -23,7 +23,6 @@ exports.postMessageWorker = async (req, res) => {
   const authResp = await authService.verifyAuth(token, userIdSend);
   if (!authResp.auth) return res.status(401).json({ msg: 'not auth' });
 
-  // Lê mensagens da fila Redis e salva no banco
   const channel = `${userIdSend}${userIdReceive}`;
   const msgs = await redisService.dequeueAllMessages(channel);
 

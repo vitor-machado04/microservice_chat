@@ -18,3 +18,10 @@ exports.dequeueAllMessages = async (queueName) => {
   while (msg !== null);
   return messages;
 };
+
+exports.ping = async () => {
+  const pong = await client.ping();
+  if (pong !== 'PONG') {
+    throw new Error('Redis não respondeu PONG');
+  }
+};

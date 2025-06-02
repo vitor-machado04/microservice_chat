@@ -41,8 +41,7 @@ class AuthController
 
         if ($decoded->userId == $user['user_id']) {
             echo json_encode(['auth' => true]);
-        } 
-        else {
+        } else {
             echo json_encode(['auth' => false]);
         }
     }
@@ -98,10 +97,10 @@ class AuthController
             echo json_encode([
                 'message' => 'ok',
                 'user' => [
-                    'name' => $data['name'],
-                    'lastName' => $data['lastName'],
-                    'email' => $data['email']
-                ]
+                        'name' => $data['name'],
+                        'lastName' => $data['lastName'],
+                        'email' => $data['email']
+                    ]
             ]);
         } else {
             http_response_code(500);
@@ -109,7 +108,7 @@ class AuthController
         }
     }
 
-    public function  getUser()
+    public function getUser()
     {
         $email = $_GET['email'] ?? null;
 
@@ -124,10 +123,23 @@ class AuthController
         if ($user) {
             unset($user['password']);
             echo json_encode($user);
-        }
-         else {
+        } else {
             http_response_code(404);
             echo json_encode(['message' => 'Usuário não encontrado']);
+        }
+    }
+
+    public function health()
+    {
+        try {
+            $this->userModel->testConnection();
+
+            http_response_code(200);
+            echo json_encode(['status' => 'healthy', 'database' => 'connected']);
+        } 
+        catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['status' => 'unhealthy', 'database' => 'disconnected', 'error' => $e->getMessage()]);
         }
     }
 }

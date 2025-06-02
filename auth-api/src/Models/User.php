@@ -39,4 +39,10 @@ class User
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
     }
+
+    public function testConnection()
+    {
+        $stmt = $this->conn->query("SELECT 1");
+        return $stmt->fetch();
+    }
 }
