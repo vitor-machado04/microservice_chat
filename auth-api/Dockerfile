@@ -28,10 +28,13 @@ COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 # Instala Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Executa o composer install durante a build da imagem
+RUN composer install --no-dev --optimize-autoloader
+
 # Altera DocumentRoot do Apache para a pasta public
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-# Expor a porta padrão
+# Expõe a porta padrão
 EXPOSE 80
 
 # Rodar o servidor Apache
